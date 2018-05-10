@@ -89,13 +89,12 @@ class GetPutObjectTest extends S3MockTest {
       exc.getErrorCode shouldBe "NoSuchBucket"
     }
 
-    it should "produce NoSuchBucket if bucket does not exist when PUTting" in {
-      val exc = intercept[AmazonS3Exception] {
-        s3.putObject("aws-404", "foo", "content")
-      }
-      exc.getStatusCode shouldBe 404
-      exc.getErrorCode shouldBe "NoSuchBucket"
-    }
+    // s3 client prevents this
+    // com.amazonaws.services.s3.model.AmazonS3Exception: The specified bucket does not exist (Service: Amazon S3; Status Code: 404; Error Code: NoSuchBucket; Request ID: null; S3 Extended Request ID: null)
+    // it should "create the bucket if it does not exist when PUTting" in {
+    //   s3.putObject("bucket-does-not-exist", "foo", "content")
+    //   s3.listBuckets().exists(_.getName == "bucket-does-not-exist") shouldBe true
+    // }
 
     it should "work with large files" in {
       val huge = Random.nextString(10 * 1024 * 1024)
