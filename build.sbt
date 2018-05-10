@@ -1,6 +1,6 @@
 name := "s3mock"
 
-version := "0.2.5"
+version := "0.2.5.1"
 
 organization := "io.findify"
 
@@ -65,8 +65,8 @@ dockerfile in docker := new Dockerfile {
   entryPoint("java", "-Xmx128m", "-jar", "--add-modules", "java.xml.bind", "/app/s3mock.jar")
 }
 imageNames in docker := Seq(
-  ImageName(s"findify/s3mock:${version.value.replaceAll("\\+", "_")}"),
-  ImageName(s"findify/s3mock:latest")
+  ImageName(s"tstapleton/s3mock:${version.value.replaceAll("\\+", "_")}"),
+  ImageName(s"tstapleton/s3mock:latest")
 )
 
 /*enablePlugins(JavaAppPackaging)
